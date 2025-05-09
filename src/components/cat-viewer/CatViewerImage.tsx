@@ -1,26 +1,87 @@
-import React from "react";
+import React, { useState, useEffect, useCallback, forwardRef, useImperativeHandle } from "react";
 import styles from "./CatViewerImage.module.css";
 
-const CatViewerImage: React.FC = () => {
+interface CatImage {
+  id: string;
+  url: string;
+  width: number;
+  height: number;
+}
+
+interface CatViewerImageProps {
+  enabled: boolean;
+  autoRefresh: boolean;
+}
+
+export interface CatViewerImageRef {
+  fetchRandomCat: () => Promise<void>;
+}
+
+const CatViewerImage = forwardRef<CatViewerImageRef, CatViewerImageProps>(({ enabled, autoRefresh }, ref) => {
+  const [imageUrl, setImageUrl] = useState<string | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  const fetchRandomCat = useCallback(async () => {
+    if (!enabled) return;
+
+    try {
+      setIsLoading(true);
+      setError(null);
+      
+      const response = await fetch("https://api.thecatapi.com/v1/images/search");
+      if (!response.ok) {
+        throw new Error("Не удалось загрузить изображение");
+      }
+      
+      const [catData]: CatImage[] = await response.json();
+      setImageUrl(catData.url);
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Произошла ошибка");
+    } finally {
+      setIsLoading(false);
+    }
+  }, [enabled]);
+
+  useImperativeHandle(ref, () => ({
+    fetchRandomCat
+  }));
+
+  useEffect(() => {
+    fetchRandomCat();
+  }, [fetchRandomCat]);
+
+  useEffect(() => {
+    if (autoRefresh && enabled) {
+      const interval = setInterval(fetchRandomCat, 5000);
+      return () => clearInterval(interval);
+    }
+  }, [autoRefresh, enabled, fetchRandomCat]);
+
+  if (error) {
+    return (
+      <div className={styles.catImageWrapper} role="alert">
+        <p className={styles.errorText}>{error}</p>
+      </div>
+    );
+  }
+
   return (
     <div className={styles.catImageWrapper} tabIndex={0} aria-label="Картинка кота">
-      <svg
-        className={styles.catSvg}
-        viewBox="0 0 300 220"
-        fill="black"
-        xmlns="http://www.w3.org/2000/svg"
-        aria-hidden="true"
-        focusable="false"
-      >
-        <path d="M20 200 Q40 120 80 160 Q100 180 120 160 Q140 140 180 180 Q200 200 220 180 Q260 140 280 200 Q270 210 250 210 Q230 210 210 200 Q190 190 170 210 Q150 230 130 210 Q110 190 90 210 Q70 230 50 210 Q30 190 20 200 Z" />
-        <path d="M80 160 Q60 100 100 80 Q120 70 140 100 Q160 130 180 100 Q200 70 220 80 Q260 100 240 160" />
-        <circle cx="110" cy="120" r="8" fill="#fff"/>
-        <circle cx="190" cy="120" r="8" fill="#fff"/>
-        <circle cx="110" cy="120" r="4" fill="#000"/>
-        <circle cx="190" cy="120" r="4" fill="#000"/>
-      </svg>
+      {isLoading ? (
+        <div className={styles.loader}>Загрузка...</div>
+      ) : (
+        <img 
+          src={imageUrl || ''} 
+          alt="Случайный кот" 
+          className={styles.catImage}
+          onError={() => setError("Ошибка загрузки изображения")}
+        />
+      )}
     </div>
   );
-};
+});
+
+CatViewerImage.displayName = 'CatViewerImage';
 
 export { CatViewerImage };

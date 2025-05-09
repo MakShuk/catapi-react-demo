@@ -1,18 +1,19 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import './App.css';
 import Card from './components/card/Card';
 import { CatViewerControls as CatControls } from './components/cat-viewer/CatViewerControls';
-import { CatViewerImage as CatImage } from './components/cat-viewer/CatViewerImage';
+import { CatViewerImage as CatImage, CatViewerImageRef } from './components/cat-viewer/CatViewerImage';
 
 const App: React.FC = () => {
   // Состояния для контролов кота
   const [enabled, setEnabled] = useState(true);
   const [autoRefresh, setAutoRefresh] = useState(false);
+  const imageRef = useRef<CatViewerImageRef>(null);
 
   const handleEnabledChange = (value: boolean) => setEnabled(value);
   const handleAutoRefreshChange = (value: boolean) => setAutoRefresh(value);
   const handleGetCat = () => {
-    // Здесь могла бы быть логика получения кота
+    imageRef.current?.fetchRandomCat();
   };
 
   return (
@@ -25,7 +26,11 @@ const App: React.FC = () => {
           onAutoRefreshChange={handleAutoRefreshChange}
           onGetCat={handleGetCat}
         />
-        <CatImage />
+        <CatImage 
+          enabled={enabled}
+          autoRefresh={autoRefresh}
+          ref={imageRef}
+        />
       </Card>
     </div>
   );
