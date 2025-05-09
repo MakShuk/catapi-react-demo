@@ -1,0 +1,12 @@
+.catImageWrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 16px;
+}
+
+.catSvg {
+  width: 220px;
+  height: 160px;
+  display: block;
+}

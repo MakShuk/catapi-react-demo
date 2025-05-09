@@ -1,8 +1,8 @@
 {
-  "name": "github-pages-example",
-  "version": "0.0.3",
+  "name": "catapi-react-demo",
+  "version": "0.0.1",
   "private": true,
-  "homepage": "https://makshuk.github.io/github-pages-example",
+  "homepage": "https://makshuk.github.io/catapi-react-demo",
   "dependencies": {
     "@shadcn/ui": "^0.0.4",
     "@testing-library/jest-dom": "^5.17.0",

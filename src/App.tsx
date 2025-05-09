@@ -1,5 +1,8 @@
 import React, { useState } from 'react';
 import './App.css';
+import Card from './components/Card';
+import CatControls from './components/CatControls';
+import CatImage from './components/CatImage';
 
 // Иконки флагов
 const RussianFlag = () => (
@@ -25,8 +28,18 @@ const BritishFlag = () => (
 const App: React.FC = () => {
   const [isRussian, setIsRussian] = useState(false);
 
+  // Состояния для контролов кота
+  const [enabled, setEnabled] = useState(true);
+  const [autoRefresh, setAutoRefresh] = useState(false);
+
   const toggleLanguage = () => {
     setIsRussian(!isRussian);
+  };
+
+  const handleEnabledChange = (value: boolean) => setEnabled(value);
+  const handleAutoRefreshChange = (value: boolean) => setAutoRefresh(value);
+  const handleGetCat = () => {
+    // Здесь могла бы быть логика получения кота
   };
 
   return (
@@ -36,11 +49,21 @@ const App: React.FC = () => {
       </h1>
       <button
         onClick={toggleLanguage}
-        className="px-4 py-2 bg-white text-blue-600 rounded-md hover:bg-blue-50 transition-colors flex items-center"
+        className="px-4 py-2 bg-white text-blue-600 rounded-md hover:bg-blue-50 transition-colors flex items-center mb-8"
       >
         {isRussian ? <BritishFlag /> : <RussianFlag />}
         <span>{isRussian ? 'Switch to English' : 'Переключить на русский'}</span>
       </button>
+      <Card>
+        <CatControls
+          enabled={enabled}
+          autoRefresh={autoRefresh}
+          onEnabledChange={handleEnabledChange}
+          onAutoRefreshChange={handleAutoRefreshChange}
+          onGetCat={handleGetCat}
+        />
+        <CatImage />
+      </Card>
     </div>
   );
 };
