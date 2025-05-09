@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/catapi-react-demo/static/css/main.06c32279.css",
-    "main.js": "/catapi-react-demo/static/js/main.0381e279.js",
+    "main.css": "/catapi-react-demo/static/css/main.ecab52ef.css",
+    "main.js": "/catapi-react-demo/static/js/main.2a3763b2.js",
     "static/js/453.a7f01315.chunk.js": "/catapi-react-demo/static/js/453.a7f01315.chunk.js",
     "index.html": "/catapi-react-demo/index.html",
-    "main.06c32279.css.map": "/catapi-react-demo/static/css/main.06c32279.css.map",
-    "main.0381e279.js.map": "/catapi-react-demo/static/js/main.0381e279.js.map",
+    "main.ecab52ef.css.map": "/catapi-react-demo/static/css/main.ecab52ef.css.map",
+    "main.2a3763b2.js.map": "/catapi-react-demo/static/js/main.2a3763b2.js.map",
     "453.a7f01315.chunk.js.map": "/catapi-react-demo/static/js/453.a7f01315.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.06c32279.css",
-    "static/js/main.0381e279.js"
+    "static/css/main.ecab52ef.css",
+    "static/js/main.2a3763b2.js"
   ]
 }
