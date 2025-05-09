@@ -1,4 +1,4 @@
-import React, { useEffect, useState, forwardRef, useImperativeHandle } from "react";
+import React, { useEffect, useState, forwardRef, useImperativeHandle, useCallback } from "react";
 import styles from "./CatViewerImage.module.css";
 import { cn } from "../ui/lib/utils";
 
@@ -18,7 +18,7 @@ const CatViewerImage = forwardRef<CatViewerImageRef, CatViewerImageProps>(
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState<string | null>(null);
 
-    const fetchRandomCat = async () => {
+    const fetchRandomCat = useCallback(async () => {
       if (!enabled) return;
 
       setIsLoading(true);
@@ -35,7 +35,7 @@ const CatViewerImage = forwardRef<CatViewerImageRef, CatViewerImageProps>(
       } finally {
         setIsLoading(false);
       }
-    };
+    }, [enabled]);
 
     useImperativeHandle(ref, () => ({
       fetchRandomCat
@@ -53,7 +53,7 @@ const CatViewerImage = forwardRef<CatViewerImageRef, CatViewerImageProps>(
           clearInterval(intervalId);
         }
       };
-    }, [enabled, autoRefresh]);
+    }, [enabled, autoRefresh, fetchRandomCat]);
 
     if (isLoading) {
       return (

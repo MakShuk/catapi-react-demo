@@ -4,7 +4,7 @@ import { cn } from "./lib/utils";
 import styles from "./Switch.module.css";
 
 const Switch = React.forwardRef<
-  React.ElementRef<typeof SwitchPrimitives.Root>,
+  HTMLButtonElement,
   React.ComponentPropsWithoutRef<typeof SwitchPrimitives.Root>
 >(({ className, ...props }, ref) => (
   <SwitchPrimitives.Root
