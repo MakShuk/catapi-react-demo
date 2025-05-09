@@ -1,4 +1,7 @@
 import React from "react";
+import { Switch } from "../ui/switch";
+import { Button } from "../ui/button";
+import { cn } from "../ui/lib/utils";
 import styles from "./CatViewerControls.module.css";
 
 interface CatViewerControlsProps {
@@ -17,34 +20,43 @@ const CatViewerControls: React.FC<CatViewerControlsProps> = ({
   onGetCat,
 }) => {
   return (
-    <div className={styles.controls}>
-      <label className={styles.checkboxLabel}>
-        <input
-          type="checkbox"
+    <div className={cn(styles.controls, "space-y-4")}>
+      <div className="flex items-center space-x-2">
+        <Switch
+          id="enabled"
           checked={enabled}
-          onChange={e => onEnabledChange(e.target.checked)}
+          onCheckedChange={onEnabledChange}
           aria-label="Включено"
         />
-        Enabled
-      </label>
-      <label className={styles.checkboxLabel}>
-        <input
-          type="checkbox"
+        <label
+          htmlFor="enabled"
+          className="text-sm font-medium leading-none cursor-pointer"
+        >
+          Enabled
+        </label>
+      </div>
+      <div className="flex items-center space-x-2">
+        <Switch
+          id="auto-refresh"
           checked={autoRefresh}
-          onChange={e => onAutoRefreshChange(e.target.checked)}
+          onCheckedChange={onAutoRefreshChange}
           aria-label="Автообновление каждые 5 секунд"
         />
-        Auto-refresh every 5 seconds
-      </label>
-      <button
-        className={styles.button}
+        <label
+          htmlFor="auto-refresh"
+          className="text-sm font-medium leading-none cursor-pointer"
+        >
+          Auto-refresh every 5 seconds
+        </label>
+      </div>
+      <Button
         onClick={onGetCat}
         aria-label="Получить кота"
-        tabIndex={0}
-        type="button"
+        className="w-full"
+        variant="default"
       >
         Get cat
-      </button>
+      </Button>
     </div>
   );
 };
