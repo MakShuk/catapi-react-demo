@@ -11,8 +11,18 @@
 }
 
 .min-h-screen {
+  min-height: 100dvh; /* Использование dynamic viewport height */
+  height: 100dvh; /* Явно задаем высоту */
   background-size: 200% 200%;
   animation: gradient 15s ease infinite;
+}
+
+/* Поддержка для браузеров, которые не поддерживают dvh */
+@supports not (height: 100dvh) {
+  .min-h-screen {
+    min-height: 100vh;
+    height: 100vh;
+  }
 }
 
 /* Плавные переходы для всех интерактивных элементов */
