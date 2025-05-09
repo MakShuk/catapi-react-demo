@@ -1,0 +1,171 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --primary-gradient: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+}
+
+/* Базовые стили */
+body {
+  margin: 0;
+  font-family:
+    'Inter',
+    -apple-system,
+    BlinkMacSystemFont,
+    'Segoe UI',
+    Roboto,
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  min-height: 100vh;
+  color: #1f2937;
+  overflow-x: hidden;
+}
+
+/* Паттерн сетки для фона */
+.bg-grid-pattern {
+  background-size: 40px 40px;
+  background-image:
+    linear-gradient(to right, rgba(0, 0, 0, 0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(0, 0, 0, 0.05) 1px, transparent 1px);
+}
+
+/* Улучшенная типографика */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  letter-spacing: -0.025em;
+}
+
+/* Плавные переходы */
+.transition-all {
+  transition-property:
+    background-color, border-color, color, fill, stroke, opacity, box-shadow, transform;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+}
+
+/* Предотвращение анимаций при загрузке */
+.no-animation {
+  animation: none !important;
+  transition: none !important;
+}
+
+/* Добавляем класс для контроля загрузки */
+:root {
+  --render-ready: 0;
+}
+
+:root[data-render-ready='1'] {
+  --render-ready: 1;
+}
+
+/* Анимации только после полной загрузки */
+@media (prefers-reduced-motion: no-preference) {
+  .animate-on-ready {
+    opacity: 0;
+    transform: translateY(10px);
+    transition:
+      opacity 0.3s ease,
+      transform 0.3s ease;
+  }
+
+  :root[data-render-ready='1'] .animate-on-ready {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Кастомный скроллбар */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #c7d2fe;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #8b5cf6;
+}
+
+/* Улучшенный фокус для доступности */
+:focus {
+  outline: 2px solid #8b5cf6;
+  outline-offset: 2px;
+}
+
+:focus:not(:focus-visible) {
+  outline: none;
+}
+
+/* Медиа-запросы для адаптивности */
+@media (max-width: 640px) {
+  body {
+    font-size: 16px;
+  }
+
+  .max-w-md {
+    max-width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+/* Анимации */
+@keyframes float {
+  0% {
+    transform: translateY(0px);
+  }
+
+  50% {
+    transform: translateY(-10px);
+  }
+
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+/* Улучшенные стили для интерактивных элементов */
+button,
+a {
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Оптимизация для темного режима */
+@media (prefers-color-scheme: dark) {
+  body {
+    color: #f3f4f6;
+    background-color: #111827;
+  }
+
+  .bg-grid-pattern {
+    background-image:
+      linear-gradient(to right, rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+  }
+}
+
+/* Улучшенная читаемость текста */
+p,
+li {
+  line-height: 1.625;
+}

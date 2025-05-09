@@ -1,0 +1,35 @@
+{
+    "files.exclude": {
+        "**/.git": true,
+        "**/.svn": true,
+        "**/.hg": true,
+        "**/.DS_Store": true,
+        "**/Thumbs.db": true,
+        "**/CVS": true,
+        ".vscode": true,
+        "node_modules": true,
+        "tsconfig.json": true,
+        "tailwind.config.js": true,
+        ".gitignore": true,
+        ".prettierrc": true,
+        ".prettierignore": true,
+        ".eslintrc.json": true,
+        "package-lock.json": true
+    },
+    "hide-files.files": [
+        ".vscode",
+        "node_modules",
+        "tsconfig.json",
+        "tailwind.config.js",
+        ".gitignore",
+        ".prettierrc",
+        ".prettierignore",
+        ".eslintrc.json",
+        "package-lock.json"
+    ],
+    "cSpell.words": [
+        "shadcn",
+        "TTFB",
+        "скроллбар"
+    ]
+}
