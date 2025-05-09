@@ -13,7 +13,7 @@
 
 .button:focus-visible {
   outline: none;
-  box-shadow: 0 0 0 2px var(--ring), 0 0 0 4px var(--background);
+  box-shadow: 0 0 0 2px hsl(var(--ring)), 0 0 0 4px hsl(var(--background));
 }
 
 .button:disabled {
@@ -23,49 +23,49 @@
 
 /* Variants */
 .default {
-  background-color: var(--primary);
-  color: var(--primary-foreground);
+  background-color: hsl(var(--primary));
+  color: hsl(var(--primary-foreground));
 }
 
 .default:hover {
-  background-color: color-mix(in srgb, var(--primary) 90%, transparent);
+  background-color: color-mix(in srgb, hsl(var(--primary)) 90%, transparent);
 }
 
 .destructive {
-  background-color: var(--destructive);
-  color: var(--destructive-foreground);
+  background-color: hsl(var(--destructive));
+  color: hsl(var(--destructive-foreground));
 }
 
 .destructive:hover {
-  background-color: color-mix(in srgb, var(--destructive) 90%, transparent);
+  background-color: color-mix(in srgb, hsl(var(--destructive)) 90%, transparent);
 }
 
 .outline {
-  border: 1px solid var(--input);
-  background-color: var(--background);
+  border: 1px solid hsl(var(--input));
+  background-color: hsl(var(--background));
 }
 
 .outline:hover {
-  background-color: var(--accent);
-  color: var(--accent-foreground);
+  background-color: hsl(var(--accent));
+  color: hsl(var(--accent-foreground));
 }
 
 .secondary {
-  background-color: var(--secondary);
-  color: var(--secondary-foreground);
+  background-color: hsl(var(--secondary));
+  color: hsl(var(--secondary-foreground));
 }
 
 .secondary:hover {
-  background-color: color-mix(in srgb, var(--secondary) 80%, transparent);
+  background-color: color-mix(in srgb, hsl(var(--secondary)) 90%, transparent);
 }
 
 .ghost:hover {
-  background-color: var(--accent);
-  color: var(--accent-foreground);
+  background-color: hsl(var(--accent));
+  color: hsl(var(--accent-foreground));
 }
 
 .link {
-  color: var(--primary);
+  color: hsl(var(--primary));
   text-decoration: underline;
   text-underline-offset: 4px;
 }
